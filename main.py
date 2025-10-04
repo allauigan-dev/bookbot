@@ -1,3 +1,4 @@
+import sys
 from stats import get_word_count
 from stats import get_char_count
 from stats import sort_char_count
@@ -9,7 +10,10 @@ def get_book_text(filepath):
 
 def main():
     # use the relative path to your frankenstein.txt file
-    path_to_file = "books/frankenstein.txt"
+    if len(sys.argv) !=2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+    path_to_file = sys.argv[1]
     text = get_book_text(path_to_file)
     # print(text)
     word_count = get_word_count(text)
@@ -19,9 +23,13 @@ def main():
     print(f"Found {word_count} total words")
     print("--------- Character Count -------")
     char_count = get_char_count(text)
-    print(char_count)
+    # print(char_count)
     sort = sort_char_count(char_count)
-    print(sort)
+    for item in sort:
+        if item["char"].isalpha():
+              print(f"{item['char']}: {item['num']}")
+    print("============= END ===============")
+    
 
 # call main() to run the program
 if __name__ == "__main__":

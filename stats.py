@@ -15,9 +15,11 @@ def get_char_count(filepath):
     return char_count
 
 def sort_char_count(list_count):
-    sorted = {
-        "char": "",
-        "nums": ""
-    }
-    for char in list_count:
-            
+    char_list = [{"char":c, "num": n} for c, n in list_count.items()]
+
+    def get_num(a):
+        return a["num"]
+    
+    char_list.sort(key=get_num, reverse=True)
+
+    return char_list
